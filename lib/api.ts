@@ -38,7 +38,9 @@ export const fetchNoteById = async (id: string): Promise<Note> => {
   return data;
 };
 
-export const createNote = async (noteData: Omit<Note, 'id'>): Promise<Note> => {
+export const createNote = async (
+  noteData: Omit<Note, 'id' | 'createdAt' | 'updatedAt'>
+): Promise<Note> => {
   const { data } = await noteApi.post<Note>('/notes', noteData);
   return data;
 };
