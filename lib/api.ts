@@ -5,7 +5,6 @@ export const noteApi = axios.create({
   baseURL: 'https://notehub-public.goit.study/api',
 });
 
-
 noteApi.interceptors.request.use((config) => {
   const token = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
   if (token) {
@@ -15,7 +14,7 @@ noteApi.interceptors.request.use((config) => {
 });
 
 export interface FetchNotesParams {
-  page?: number;  
+  page?: number;
   perPage?: number;
   search?: string;
 }
@@ -25,13 +24,16 @@ export interface FetchNotesResponse {
   totalPages: number;
 }
 
-export const fetchNotes = async ({ page, perPage, search }: FetchNotesParams = {}): Promise<FetchNotesResponse> => {
+export const fetchNotes = async ({
+  page,
+  perPage,
+  search,
+}: FetchNotesParams = {}): Promise<FetchNotesResponse> => {
   const { data } = await noteApi.get<FetchNotesResponse>('/notes', {
     params: { page, perPage, search },
   });
   return data;
 };
-
 
 export const fetchNoteById = async (id: string): Promise<Note> => {
   const { data } = await noteApi.get<Note>(`/notes/${id}`);
@@ -45,6 +47,7 @@ export const createNote = async (
   return data;
 };
 
-export const deleteNote = async (id: string): Promise<void> => {
-  await noteApi.delete(`/notes/${id}`);
+export const deleteNote = async (id: string): Promise<Note> => {
+  const { data } = await noteApi.delete<Note>(`/notes/${id}`);
+  return data;
 };
