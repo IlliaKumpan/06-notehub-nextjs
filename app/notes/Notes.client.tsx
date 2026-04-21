@@ -10,7 +10,6 @@ import { Modal } from '@/components/Modal/Modal';
 import { NoteForm } from '@/components/NoteForm/NoteForm';
 
 export default function NotesClient() {
-  // 1. Стани для пагінації, пошуку та модалки
   const [page, setPage] = useState<number>(1);
   const [search, setSearch] = useState<string>('');
   const [debouncedSearch, setDebouncedSearch] = useState<string>('');
