@@ -1,11 +1,11 @@
+'use client';
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query';
 import { fetchNotes } from '@/lib/api';
-import dynamic from 'next/dynamic'; // Додаємо імпорт dynamic
-
+import  dynamic  from  'next/dynamic'; 
 
 const NotesClient = dynamic(() => import('./Notes.client'), {
   ssr: false,
@@ -16,11 +16,11 @@ export default async function NotesPage() {
 
   await queryClient.prefetchQuery({
     queryKey: ['notes'],
-    queryFn: () => fetchNotes({ page: 1, perPage: 10 }),
+    queryFn: () => fetchNotes({ page: 1, perPage: 10 }), 
   });
 
   return (
-    <main>
+    <main> 
       <HydrationBoundary state={dehydrate(queryClient)}>
         <NotesClient />
       </HydrationBoundary>
