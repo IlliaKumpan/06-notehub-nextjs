@@ -1,15 +1,12 @@
-'use client';
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query';
 import { fetchNotes } from '@/lib/api';
-import  dynamic  from  'next/dynamic'; 
+import dynamic from 'next/dynamic';
 
-const NotesClient = dynamic(() => import('./Notes.client'), {
-  ssr: false,
-});
+const NotesClient = dynamic(() => import('./Notes.client'));
 
 export default async function NotesPage() {
   const queryClient = new QueryClient();
@@ -21,6 +18,9 @@ export default async function NotesPage() {
 
   return (
     <main> 
+      <header>
+        <h1 className="visually-hidden">Notes Hub</h1>
+      </header>
       <HydrationBoundary state={dehydrate(queryClient)}>
         <NotesClient />
       </HydrationBoundary>
