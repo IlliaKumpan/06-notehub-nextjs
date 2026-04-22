@@ -6,7 +6,7 @@ import {
 import { fetchNotes } from '@/lib/api';
 import dynamic from 'next/dynamic';
 
-const NotesClient = dynamic(() => import('./Notes.client'));
+const NotesClient = dynamic(() => import('@/app/notes/Notes.client'));
 
 export default async function NotesPage() {
   const queryClient = new QueryClient();
