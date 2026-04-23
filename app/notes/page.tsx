@@ -6,7 +6,7 @@ import {
 import { fetchNotes } from '@/lib/api';
 import dynamic from 'next/dynamic';
 
-const NotesClient = dynamic(() => import('@/app/notes/Notes.client'));
+const NotesClient = dynamic(() => import('./Notes.client'));
 
 export default async function NotesPage() {
   const queryClient = new QueryClient();
@@ -19,7 +19,7 @@ export default async function NotesPage() {
   return (
     <main> 
       <header>
-        <h1 className="visually-hidden">Notes Hub</h1>
+        <h1 className="visually-hidden">My Notes</h1>
       </header>
       <HydrationBoundary state={dehydrate(queryClient)}>
         <NotesClient />
