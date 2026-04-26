@@ -18,7 +18,7 @@ const validationSchema = Yup.object({
 });
 
 interface NoteFormProps {
-  onCancel: () => void;
+  onClose: () => void;
 }
 
 interface FormValues {
@@ -27,14 +27,13 @@ interface FormValues {
   tag: NoteTag;
 }
 
-export const NoteForm = ({ onCancel }: NoteFormProps) => {
+export const NoteForm = ({ onClose }: NoteFormProps) => {
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: createNote,
     onSuccess: () => {
-
       queryClient.invalidateQueries({ queryKey: ['notes'] });
-      onCancel(); 
+      onClose();
     },
   });
 
@@ -58,24 +57,13 @@ export const NoteForm = ({ onCancel }: NoteFormProps) => {
         <Form className={css.form}>
           <div className={css.formGroup}>
             <label htmlFor="title">Title</label>
-            <Field
-              id="title"
-              type="text"
-              name="title"
-              className={css.input}
-            />
+            <Field id="title" type="text" name="title" className={css.input} />
             <ErrorMessage name="title" component="span" className={css.error} />
           </div>
 
           <div className={css.formGroup}>
             <label htmlFor="content">Content</label>
-            <Field
-              id="content"
-              name="content"
-              as="textarea"
-              rows={8}
-              className={css.textarea}
-            />
+            <Field id="content" name="content" as="textarea" rows={8} className={css.textarea} />
             <ErrorMessage name="content" component="span" className={css.error} />
           </div>
 
@@ -92,11 +80,7 @@ export const NoteForm = ({ onCancel }: NoteFormProps) => {
           </div>
 
           <div className={css.actions}>
-            <button 
-              type="button" 
-              className={css.cancelButton} 
-              onClick={onCancel}
-            >
+            <button type="button" className={css.cancelButton} onClick={onClose}>
               Cancel
             </button>
             <button
